@@ -46,7 +46,7 @@ Click "Pause/Resume" to pause or continue playing
 
 Clone this repository:
 
-git clone https://github.com/your-username/bounce-rush.git
+git clone https://github.com/Mazid2003/Bounce-Rush-using-javascript.git
 
 Open the index.html file in a browser.
 
