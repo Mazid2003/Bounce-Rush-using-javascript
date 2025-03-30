@@ -56,6 +56,8 @@ Start jumping and dodging obstacles!
 
 Feel free to fork the repo and improve the game with new features or optimizations. Pull requests are welcome!
 
+and also submit PRs, and give your feedback! 🔥💡
+
 **📜 License**
 
 This project is open-source and available under the MIT License.
