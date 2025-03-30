@@ -1,4 +1,4 @@
-# Bounce-Rush-using-javascript
+# Bounce-Rush-using-javascript 🥎
 
 A simple and fun 2D jumping game where a bouncing ball must dodge square obstacles while collecting points. The longer you survive, the higher your score!
 
