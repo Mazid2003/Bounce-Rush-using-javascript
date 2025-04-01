@@ -1,1 +1,61 @@
+1. Project Requirements
 
+🖥️ Software & Technologies Used:
+
+Languages: HTML, CSS, JavaScript
+Game Engine: Native JavaScript (No external libraries required)
+Development Environment: Any text editor (VS Code, Sublime Text, etc.)
+Browser Compatibility: Chrome, Firefox, Edge, Safari
+
+2. Features of the Game
+
+✅ Simple & Fun Gameplay:
+
+A dino character that jumps over obstacles.
+Increasing difficulty level as score increases.
+Collision detection for game over.
+
+✅ Game Controls:
+
+Spacebar to jump.
+Start/Pause/Resume buttons.
+
+✅ Dynamic Environment:
+
+Randomized obstacle spawning.
+Smooth physics-based jumping with gravity effect.
+Speed increases every 10 points for a progressive challenge.
+
+✅ Score System:
+
+Score displayed in real-time.
+Game resets upon collision.
+3. Setup Instructions (For GitHub README)
+How to Run the Game Locally:
+
+Clone the Repository:
+
+git clone https://github.com/Mazid2003/Bounce-Rush-using-javascript.git
+
+Navigate to the Folder:
+
+Open index.html in a Browser
+Just double-click index.html or open it manually in Chrome/Firefox.
+
+4. Future Enhancements (Optional)
+If you plan to improve the game, list features like:
+
+Adding background music & sound effects.
+Introducing different types of obstacles.
+Implementing mobile touch controls.
+Adding a leaderboard system with local storage.
+
+📌 Final Steps for GitHub Upload:
+
+git init
+git add .
+git commit -m "Initial commit - Dino Runner Game"
+git branch -M main
+git remote add origin https://github.com/Mazid2003/Bounce-Rush-using-javascript.git
+git push -u origin main
+Enable GitHub Pages (if needed) to host it as a live playable demo.
