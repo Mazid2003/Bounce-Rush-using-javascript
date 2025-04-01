@@ -50,12 +50,4 @@ Introducing different types of obstacles.
 Implementing mobile touch controls.
 Adding a leaderboard system with local storage.
 
-📌 Final Steps for GitHub Upload:
 
-git init
-git add .
-git commit -m "Initial commit - Dino Runner Game"
-git branch -M main
-git remote add origin https://github.com/Mazid2003/Bounce-Rush-using-javascript.git
-git push -u origin main
-Enable GitHub Pages (if needed) to host it as a live playable demo.
