@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino Runner Game</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to top, #87CEEB, #E0F6FF);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .game-container {
+            position: relative;
+            width: 800px;
+            height: 300px;
+            background-color: white;
+            border: 4px solid #444;
+            overflow: hidden;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .dino {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: green;
+    bottom: 10px;
+    left: 50px;
+    border-radius: 50%; /* Makes it a circular shape */
+}
+
+        
+        .obstacle {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background-color: red;
+            bottom: 10px;
+            right: -40px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+        }
+        .score {
+            font-size: 22px;
+            font-weight: bold;
+            color: #444;
+            margin-top: 10px;
+        }
+        .buttons {
+            margin-top: 15px;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+        button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        .start-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .pause-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dino Runner Game</h1>
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="game-container">
+        <div class="dino"></div>
+    </div>
+    <div class="buttons">
+        <button class="start-btn" onclick="startGame()">Start</button>
+        <button class="pause-btn" id="pauseBtn" onclick="togglePause()">Pause</button>
+    </div>
+    <script>
+        let dino = document.querySelector(".dino");
+let gameContainer = document.querySelector(".game-container");
+let scoreDisplay = document.getElementById("score");
+
+let isJumping = false, gameRunning = false, isPaused = false;
+let score = 0, speed = 5, gravity = 1.5;
+let dinoY = 10, velocity = 0;
+let gameLoopInterval, obstacleInterval, scoreInterval;
+let obstacles = [];
+let jumpPower = 15, maxJumpPower = 35;
+let isHoldingJump = false;
+
+function gameLoop() {
+    if (!gameRunning) return;
+
+    // Apply gravity when mid-air
+    if (dinoY > 10 || velocity > 0) {
+        dinoY += velocity;
+        velocity -= gravity;
+    }
+
+    // Prevent dino from falling below the ground
+    if (dinoY <= 10) {
+        dinoY = 10;
+        velocity = 0;
+        isJumping = false;
+    }
+
+    dino.style.bottom = dinoY + "px";
+
+    // Move obstacles & check collision
+    obstacles.forEach((obstacle, index) => {
+        let obsLeft = parseInt(getComputedStyle(obstacle).right);
+        obstacle.style.right = obsLeft + speed + "px";
+
+        let dinoRect = dino.getBoundingClientRect();
+        let obsRect = obstacle.getBoundingClientRect();
+
+        if (
+            dinoRect.right > obsRect.left &&
+            dinoRect.left < obsRect.right &&
+            dinoRect.bottom > obsRect.top
+        ) {
+            alert("Game Over! Score: " + score);
+            location.reload();
+        }
+
+        if (obsLeft > 800) {
+            gameContainer.removeChild(obstacle);
+            obstacles.splice(index, 1);
+        }
+    });
+
+    gameLoopInterval = requestAnimationFrame(gameLoop);
+}
+
+function createObstacle() {
+    if (!gameRunning) return;
+
+    let obstacle = document.createElement("div");
+    obstacle.classList.add("obstacle");
+    gameContainer.appendChild(obstacle);
+    obstacles.push(obstacle);
+}
+
+function spawnObstacles() {
+    if (!gameRunning) return;
+
+    let obstacleCount = Math.min(1 + Math.floor(score / 20), 3);
+    for (let i = 0; i < obstacleCount; i++) {
+        setTimeout(() => createObstacle(), i * 500);
+    }
+
+    obstacleInterval = setTimeout(spawnObstacles, Math.max(2000 - score * 10, 800));
+}
+
+function startGame() {
+    if (gameRunning) return;
+    gameRunning = true;
+    isPaused = false;
+    document.getElementById("pauseBtn").textContent = "Pause";
+    gameLoop();
+    spawnObstacles();
+    scoreInterval = setInterval(() => {
+        scoreDisplay.textContent = ++score;
+        if (score % 10 === 0) speed += 1;
+    }, 500);
+}
+
+function togglePause() {
+    let pauseBtn = document.getElementById("pauseBtn");
+    if (isPaused) {
+        gameRunning = true;
+        gameLoop();
+        spawnObstacles();
+        scoreInterval = setInterval(() => {
+            scoreDisplay.textContent = ++score;
+            if (score % 10 === 0) speed += 1;
+        }, 500);
+        pauseBtn.textContent = "Pause";
+    } else {
+        gameRunning = false;
+        cancelAnimationFrame(gameLoopInterval);
+        clearTimeout(obstacleInterval);
+        clearInterval(scoreInterval);
+        pauseBtn.textContent = "Resume";
+    }
+    isPaused = !isPaused;
+}
+
+// Jump controls
+document.addEventListener("keydown", (e) => {
+    if (e.key === " ") {
+        e.preventDefault();
+        if (!isJumping) {
+            isJumping = true;
+            isHoldingJump = true;
+            velocity = jumpPower;
+        }
+    }
+});
+
+document.addEventListener("keyup", (e) => {
+    if (e.key === " ") {
+        isHoldingJump = false;
+    }
+});
+
+// Continuous Jump Control (Smooth jump effect)
+setInterval(() => {
+    if (isHoldingJump && velocity < maxJumpPower) {
+        velocity += 1.5; // Increase jump gradually
+    }
+}, 50);
+
+
+    </script>
+</body>
+</html>
