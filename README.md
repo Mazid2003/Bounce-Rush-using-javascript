@@ -48,7 +48,7 @@ Clone this repository:
 
 git clone https://github.com/Mazid2003/Bounce-Rush-using-javascript.git
 
-Open the index.html file in a browser.
+Open the index.html file in a browser with the help live server.
 
 Start jumping and dodging obstacles!
 
