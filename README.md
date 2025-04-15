@@ -55,8 +55,12 @@ Start jumping and dodging obstacles!
 **Screenshots**
 
 **Output 1:**
-![Uploading screenshot_2025-04-15_09-02-42.png…](C:\Users\USER\Desktop\project\screenshots)
 
+![screenshot_2025-04-15_09-02-42](https://github.com/user-attachments/assets/ba5357e4-549b-4ff9-8b49-42f6ddf90382)
+
+**Output 2:**
+
+![screenshot_2025-04-15_09-03-31](https://github.com/user-attachments/assets/03e22872-a3a4-4a5d-ac9b-01f6b7882d4a)
 
 **🤝 Contributing**
 
