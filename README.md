@@ -52,6 +52,12 @@ Open the index.html file in a browser with the help live server.
 
 Start jumping and dodging obstacles!
 
+**Screenshots**
+
+**Output 1:**
+![Uploading screenshot_2025-04-15_09-02-42.png…](C:\Users\USER\Desktop\project\screenshots)
+
+
 **🤝 Contributing**
 
 Feel free to fork the repo and improve the game with new features or optimizations. Pull requests are welcome!
