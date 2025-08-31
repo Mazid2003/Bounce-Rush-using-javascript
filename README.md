@@ -2,6 +2,10 @@
 
 A simple and fun 2D jumping game where a bouncing ball must dodge square obstacles while collecting points. The longer you survive, the higher your score!
 
+**Wanna play this game**
+
+[Click here](https://bounce-rush-using-javascript.vercel.app/)
+
 **🎮 Gameplay**
 
 Control a circular ball that jumps over square obstacles.
